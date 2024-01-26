@@ -11,7 +11,11 @@ import AddCar from "./components/AddCar"
 import EditCar from "./components/EditCar"
 import DeleteCar from "./components/DeleteCar"
 import DisplayAllCars from "./components/DisplayAllCars"
-
+import Main from "./components/Main"
+import About from "./components/About"
+import Contact from "./components/Contact"
+import Search from "./components/Search"
+import Cart from "./components/Cart"
     
 export default class App extends Component 
 {
@@ -22,13 +26,22 @@ export default class App extends Component
                 <Switch>
                     <Route exact path="/Register" component={Register} />
                     <Route exact path="/ResetDatabase" component={ResetDatabase} />                    
-                    <Route exact path="/" component={DisplayAllCars} />
+                    {/* <Route exact path="/" component={DisplayAllCars} /> */}
                     <Route exact path="/Login" component={Login} />                 
                     <Route exact path="/AddCar" component={AddCar} />
                     <Route exact path="/EditCar/:id" component={EditCar} />
                     <Route exact path="/DeleteCar/:id" component={DeleteCar} />
                     <Route exact path="/DisplayAllCars" component={DisplayAllCars}/> 
-                    <Route path="*" component={DisplayAllCars}/>                            
+                    {/* <Route path="*" component={DisplayAllCars}/>                             */}
+                    <Route exact path="/Main" component={Main} /> 
+                     <Route exact path="/About" component={About} /> 
+                    <Route exact path="/Contact" component={Contact} /> 
+                    <Route exact path="/Search" component={Search} /> 
+                    <Route exact path="/Cart" component={Cart} /> 
+                    <Route exact path="/" component={Main} />
+                    <Route path="*" component={Main}/>  
+                    
+                    
                 </Switch>
             </BrowserRouter>
         )
