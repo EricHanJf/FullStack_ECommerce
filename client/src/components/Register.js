@@ -58,16 +58,20 @@ export default class Register extends Component
             }
         })   
     }
-
-
+    
     render() 
     {     
         return (
+            <div className="outside-form-container">
             <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm" onSubmit={this.handleSubmit}>
            
                 {this.state.isRegistered ? <Redirect to="/DisplayAllCars"/> : null} 
             
-                <h2>New User Registration</h2>
+                <div className="loginHeaderContainer">
+                <Link className="anotherLoginHeader" to={"/Login"}>Login</Link>  
+                <p className="loginHeaderLink">|</p>
+                <h2>Sign Up</h2>
+                </div>
            
                 <input  
                     name = "name"              
@@ -107,9 +111,12 @@ export default class Register extends Component
                     onChange = {this.handleChange}
                 /><br/><br/>
                 
+                <span>
                 <LinkInClass value="Register New User" className="green-button" onClick={this.handleSubmit} />
-                <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link>   
+                <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link> 
+                </span>  
             </form>
+            </div>
         )
     }
 }

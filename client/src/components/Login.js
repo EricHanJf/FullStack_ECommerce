@@ -3,7 +3,7 @@ import {Redirect, Link} from "react-router-dom"
 import axios from "axios"
 
 import LinkInClass from "../components/LinkInClass"
-import {SERVER_HOST} from "../config/global_constants"
+import {ACCESS_LEVEL_GUEST, SERVER_HOST} from "../config/global_constants"
 
 
 export default class Login extends Component
@@ -31,6 +31,9 @@ export default class Login extends Component
         axios.post(`${SERVER_HOST}/users/login/${this.state.email}/${this.state.password}`)
         .then(res => 
         {     
+            // default if not logged in
+            sessionStorage.name = "GUEST"
+            sessionStorage.accessLevel = ACCESS_LEVEL_GUEST 
             if(res.data)
             {
                 if (res.data.errorMessage)
@@ -39,7 +42,10 @@ export default class Login extends Component
                 }
                 else // user successfully logged in
                 { 
-                    console.log("User logged in")                    
+                    console.log("User logged in")
+                    
+                    sessionStorage.name = res.data.name
+                    sessionStorage.accessLevel = res.data.accessLevel
                     
                     this.setState({isLoggedIn:true})
                 }        
@@ -51,36 +57,40 @@ export default class Login extends Component
         })                
     }
 
-
-    render()
-    {            
+    render() {
         return (
-            <form className="form-container" noValidate = {true} id = "loginOrRegistrationForm">
-                <h2>Login</h2>
-                
-                {this.state.isLoggedIn ? <Redirect to="/DisplayAllCars"/> : null} 
-                
-                <input 
-                    type = "email" 
-                    name = "email" 
-                    placeholder = "Email"
-                    autoComplete="email"
-                    value={this.state.email} 
-                    onChange={this.handleChange}
-                /><br/>
-                    
-                <input 
-                    type = "password" 
-                    name = "password" 
-                    placeholder = "Password"
-                    autoComplete="password"
-                    value={this.state.password} 
-                    onChange={this.handleChange}
-                /><br/><br/>
-                
-                <LinkInClass value="Login" className="green-button" onClick={this.handleSubmit}/> 
-                <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link>                                      
-            </form>
+            <div className="outside-form-container">
+                <form className="form-container" noValidate={true} id="loginOrRegistrationForm">
+                    <div className="loginHeaderContainer">
+                        <h2>Login</h2>
+                        <p className="loginHeaderLink">|</p>
+                        <Link className="anotherLoginHeader" to={"/Register"}>Sign Up</Link>
+                    </div>
+                    {this.state.isLoggedIn ? <Redirect to="/DisplayAllCars" /> : null}
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        autoComplete="email"
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                    /><br />
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        autoComplete="password"
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                    /><br /><br />
+                    <span>
+                        <LinkInClass value="Login" className="green-button" onClick={this.handleSubmit} />
+                        <Link className="red-button" to={"/DisplayAllCars"}>Cancel</Link>
+                    </span>
+                </form>
+            </div>
         )
     }
 }

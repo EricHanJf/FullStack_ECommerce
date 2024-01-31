@@ -3,6 +3,7 @@ import {BrowserRouter, Switch, Route} from "react-router-dom"
 
 import "bootstrap/dist/css/bootstrap.css"
 import "./css/App.css"
+import "./scss/style.css"
 
 import Register from "./components/Register"
 import ResetDatabase from "./components/ResetDatabase"
@@ -16,6 +17,20 @@ import About from "./components/About"
 import Contact from "./components/Contact"
 import Search from "./components/Search"
 import Cart from "./components/Cart"
+import Logout from "./components/Logout"
+
+
+import LoggedInRoute from "./components/LoggedInRoute"
+
+
+import {ACCESS_LEVEL_GUEST} from "./config/global_constants"
+
+
+if (typeof sessionStorage.accessLevel === "undefined")
+{
+    sessionStorage.name = "GUEST"
+    sessionStorage.accessLevel = ACCESS_LEVEL_GUEST
+}
     
 export default class App extends Component 
 {
@@ -28,16 +43,17 @@ export default class App extends Component
                     <Route exact path="/ResetDatabase" component={ResetDatabase} />                    
                     {/* <Route exact path="/" component={DisplayAllCars} /> */}
                     <Route exact path="/Login" component={Login} />                 
-                    <Route exact path="/AddCar" component={AddCar} />
-                    <Route exact path="/EditCar/:id" component={EditCar} />
-                    <Route exact path="/DeleteCar/:id" component={DeleteCar} />
+                    <LoggedInRoute exact path="/Logout" component={Logout} />
+                    <LoggedInRoute exact path="/AddCar" component={AddCar} />
+                    <LoggedInRoute exact path="/EditCar/:id" component={EditCar} />
+                    <LoggedInRoute exact path="/DeleteCar/:id" component={DeleteCar} />
                     <Route exact path="/DisplayAllCars" component={DisplayAllCars}/> 
                     {/* <Route path="*" component={DisplayAllCars}/>                             */}
                     <Route exact path="/Main" component={Main} /> 
-                     <Route exact path="/About" component={About} /> 
+                    {/* <Route exact path="/About" component={About} /> 
                     <Route exact path="/Contact" component={Contact} /> 
                     <Route exact path="/Search" component={Search} /> 
-                    <Route exact path="/Cart" component={Cart} /> 
+                    <Route exact path="/Cart" component={Cart} />  */}
                     <Route exact path="/" component={Main} />
                     <Route path="*" component={Main}/>  
                     

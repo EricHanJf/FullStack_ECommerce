@@ -15,10 +15,9 @@ router.post(`/users/reset_user_collection`, (req,res) =>
         if(data)
         {
             const adminPassword = `123!"£qweQWE`
-            
             bcrypt.hash(adminPassword, parseInt(process.env.PASSWORD_HASH_SALT_ROUNDS), (err, hash) =>  
             {
-                usersModel.create({name:"Administrator",email:"admin@admin.com",password:hash}, (createError, createData) => 
+                usersModel.create({name:"Administrator",email:"admin@admin.com",password:hash,accessLevel:parseInt(process.env.ACCESS_LEVEL_ADMIN)}, (createError, createData) => 
                 {
                     if(createData)
                     {
@@ -39,8 +38,7 @@ router.post(`/users/reset_user_collection`, (req,res) =>
 })
 
 
-router.post(`/users/register/:name/:email/:password`, (req,res) => 
-{
+router.post(`/users/register/:name/:email/:password`, (req,res) => {
     // If a user with this email does not already exist, then create new user
     usersModel.findOne({email:req.params.email}, (uniqueError, uniqueData) => 
     {
@@ -50,13 +48,13 @@ router.post(`/users/register/:name/:email/:password`, (req,res) =>
         }
         else
         {
-            bcrypt.hash(req.params.password, parseInt(process.env.PASSWORD_HASH_SALT_ROUNDS), (error, hash) =>  
+            bcrypt.hash(req.params.password, parseInt(process.env.PASSWORD_HASH_SALT_ROUNDS), (err, hash) =>  
             {
-                usersModel.create({name:req.params.name,email:req.params.email,password:hash}, (err, data) => 
+                usersModel.create({name:req.params.name,email:req.params.email,password:hash}, (error, data) => 
                 {
                     if(data)
                     {
-                        res.json({name: data.name})
+                        res.json({name: data.name, accessLevel:data.accessLevel})
                     }
                     else
                     {
@@ -79,7 +77,7 @@ router.post(`/users/login/:email/:password`, (req,res) =>
             {
                 if(result)
                 {
-                    res.json({name: data.name})
+                    res.json({name: data.name, accessLevel:data.accessLevel})
                 }
                 else
                 {
@@ -96,8 +94,7 @@ router.post(`/users/login/:email/:password`, (req,res) =>
 })
 
 
-router.post(`/users/logout`, (req,res) => 
-{       
+router.post(`/users/logout`, (req,res) => {       
     res.json({})
 })
 

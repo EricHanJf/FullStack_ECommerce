@@ -1,0 +1,54 @@
+/*end of table of isaac css  */
+
+header {
+    display: flex;
+}
+
+.loginHeaderLink {
+    color: #767676;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.anotherLoginHeader {
+    @extend .loginHeaderLink;
+
+    &:hover {
+        color: #d3d3d3;
+        text-decoration: none;
+    }
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    background-color: white;
+    height: 400px;
+    width: 400px;
+}
+
+#root {
+    background-color: #344a72;
+    height: 100vh;
+}
+
+.loginHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    margin-bottom: 30px;
+    border-bottom: 1.5px solid #1663be;
+}
+
+.outside-form-container {
+    display: flex;
+    height: 100vh;
+}
+
+/*end of table of isaac css */

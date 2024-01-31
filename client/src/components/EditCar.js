@@ -5,7 +5,7 @@ import axios from "axios"
 
 import LinkInClass from "../components/LinkInClass"
 
-import {SERVER_HOST} from "../config/global_constants"
+import {ACCESS_LEVEL_NORMAL_USER, SERVER_HOST} from "../config/global_constants"
 
 export default class EditCar extends Component 
 {
@@ -18,7 +18,7 @@ export default class EditCar extends Component
             colour: ``,
             year: ``,
             price: ``,
-            redirectToDisplayAllCars:false
+            redirectToDisplayAllCars:sessionStorage.accessLevel < ACCESS_LEVEL_NORMAL_USER
         }
     }
 

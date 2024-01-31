@@ -67,9 +67,9 @@ export default class Main extends Component
                         <Link className="red-button" to={"/Contact"}>Contact</Link>  
                         </div>
                         <div>
-                        <img src="../images/web_logo.png"/>
+                        <img src="../images/web_logo.png" alt="logo_image"/>
                         </div>
-                        <div>
+                         <div>
                         <Link className="green-button" to={"/Search"}></Link>
                         <Link className="blue-button" to={"/Cart"}>Cart</Link>  
                         <Link className="red-button" to={"/Login"}>Login</Link>  
