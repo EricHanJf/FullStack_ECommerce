@@ -6,7 +6,7 @@ import axios from "axios"
 import CarTable from "./CarTable"
 
 import {SERVER_HOST} from "../config/global_constants"
-
+import Footer from "./components/Footer"
 
 export default class DisplayAllCars extends Component 
 {
@@ -65,6 +65,7 @@ export default class DisplayAllCars extends Component
                         </div>
                     
                 </div>
+                <Footer />
             </div> 
         )
     }

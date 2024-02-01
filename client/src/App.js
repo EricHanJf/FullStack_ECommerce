@@ -11,7 +11,7 @@ import AddCar from "./components/AddCar"
 import EditCar from "./components/EditCar"
 import DeleteCar from "./components/DeleteCar"
 import DisplayAllCars from "./components/DisplayAllCars"
-
+import Footer from "./components/Footer"
     
 export default class App extends Component 
 {
